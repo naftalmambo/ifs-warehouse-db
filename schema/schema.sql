@@ -11,9 +11,10 @@ CREATE TABLE suppliers(
     supplier_id SERIAL PRIMARY KEY,
     supplier_name VARCHAR(100) UNIQUE NOT NULL,
     contact_person TEXT,
-    phone_number INT,
+    phone_number VARCHAR(20),
     email_address VARCHAR(100) 
     );
+
 
 CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
@@ -25,10 +26,10 @@ CREATE TABLE products(
 
 CREATE TABLE purchase_orders(
     order_id SERIAL PRIMARY KEY,
-    order_quantity INT,
-    order_date DATE,
-    supplier_id INT REFERENCES suppliers(supplier_id),
-    product_id INT REFERENCES products(product_id)
+    order_quantity INT NOT NULL,
+    order_date DATE NOT NULL,
+    supplier_id INT REFERENCES suppliers(supplier_id) NOT NULL,
+    product_id INT REFERENCES products(product_id) NOT NULL
     );
 
 CREATE TABLE stock_level(
