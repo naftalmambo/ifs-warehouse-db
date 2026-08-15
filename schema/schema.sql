@@ -1,4 +1,11 @@
 
+DROP TABLE IF EXISTS purchase_orders;
+DROP TABLE IF EXISTS stock_level;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS suppliers;
+
+
+
 
 CREATE TABLE suppliers(
     supplier_id SERIAL PRIMARY KEY,
@@ -20,7 +27,8 @@ CREATE TABLE purchase_orders(
     order_id SERIAL PRIMARY KEY,
     order_quantity INT,
     order_date DATE,
-    FOREIGN KEY (supplier_id, product_id)
+    supplier_id INT REFERENCES suppliers(supplier_id),
+    product_id INT REFERENCES products(product_id)
     );
 
 CREATE TABLE stock_level(
