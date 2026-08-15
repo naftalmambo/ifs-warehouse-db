@@ -1,6 +1,5 @@
 
 DROP TABLE IF EXISTS purchase_orders;
-DROP TABLE IF EXISTS stock_level;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS suppliers;
 
@@ -27,7 +26,7 @@ CREATE TABLE products(
 CREATE TABLE purchase_orders(
     order_id SERIAL PRIMARY KEY,
     order_quantity INT NOT NULL CHECK (order_quantity > 0),
-    order_date DATE TIMESTAMP NOT NULL,
+    order_date DATE NOT NULL DEFAULT CURRENT_DATE,
     supplier_id INT REFERENCES suppliers(supplier_id) NOT NULL,
     product_id INT REFERENCES products(product_id) NOT NULL
     );
