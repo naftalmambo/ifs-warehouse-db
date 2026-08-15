@@ -26,13 +26,9 @@ CREATE TABLE products(
 
 CREATE TABLE purchase_orders(
     order_id SERIAL PRIMARY KEY,
-    order_quantity INT NOT NULL,
-    order_date DATE NOT NULL,
+    order_quantity INT NOT NULL CHECK (order_quantity > 0),
+    order_date DATE TIMESTAMP NOT NULL,
     supplier_id INT REFERENCES suppliers(supplier_id) NOT NULL,
     product_id INT REFERENCES products(product_id) NOT NULL
     );
 
-CREATE TABLE stock_level(
-
-
-);
