@@ -1,6 +1,13 @@
 
 
 CREATE TABLE suppliers(
+    supplier_name SERIAL PRIMARY KEY,
+    supplier_name VARCHAR(100) UNIQUE NOT NULL,
+    contact_person TEXT,
+    phone_number INT,
+    email_address VARCHAR(100) 
+
+
 
 
 );
