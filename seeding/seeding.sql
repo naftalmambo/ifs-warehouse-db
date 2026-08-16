@@ -31,7 +31,7 @@ INSERT INTO products (
      3800.00, 
      4575);
 
-    INSERT INTO suppliers (
+INSERT INTO suppliers (
         supplier_name,
         contact_person,
         phone_number,
@@ -40,6 +40,15 @@ INSERT INTO products (
         ( 'Rift Valley Agricultural', 'Sarah Kiprop', '+254722333444', 'supply@riftvalleyagri.com'),
         ('Coast Wholesale Distributors', 'Omar Hassan', '+254733444555', 'orders@coastwholesale.ke'),
         ('Kilimo Bora National Sacks', 'Mary Atieno', '+254701555666', 'sales@kilimobora.org'),
-        ('Premium Flour Logistics', 'David Ndwiga', '+254755666777', 'logistics@premiumflour.com')
+        ('Premium Flour Logistics', 'David Ndwiga', '+254755666777', 'logistics@premiumflour.com');
 
 
+    
+    INSERT INTO purchase_orders (
+        order_quantity,
+        order_date,
+        supplier_id,
+        product_id) VALUES
+        (250, '2026-08-10', 1, 1),
+        (1800, '2026-08-15', 2, 2),
+        (2500, '2026-07-09', 3, 3);
