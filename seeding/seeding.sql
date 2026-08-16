@@ -31,4 +31,15 @@ INSERT INTO products (
      3800.00, 
      4575);
 
+    INSERT INTO suppliers (
+        supplier_name,
+        contact_person,
+        phone_number,
+        email_address) VALUES
+        ('Mombasa Grain Millers Ltd', 'John Kamau', '+254711222333', 'info@mombasagrain.co.ke'),
+        ( 'Rift Valley Agricultural', 'Sarah Kiprop', '+254722333444', 'supply@riftvalleyagri.com'),
+        ('Coast Wholesale Distributors', 'Omar Hassan', '+254733444555', 'orders@coastwholesale.ke'),
+        ('Kilimo Bora National Sacks', 'Mary Atieno', '+254701555666', 'sales@kilimobora.org'),
+        ('Premium Flour Logistics', 'David Ndwiga', '+254755666777', 'logistics@premiumflour.com')
+
 
