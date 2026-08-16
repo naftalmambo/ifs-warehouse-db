@@ -24,12 +24,12 @@ INSERT INTO products (
     ('Fortified Cassava Flour(1kg)', 
     'Gluten-free alternative flour enriched with essential vitamins and minerals for health-conscious markets', 
     210.00, 
-    8955),
+    950),
 
     ('Bulk Bakers Rye Flour(25kg)', 
      'Extra-large industrial sacks of dark rye flour sourced for artisan bread production facilities', 
      3800.00, 
-     4575);
+     1890);
 
 INSERT INTO suppliers (
         supplier_name,
