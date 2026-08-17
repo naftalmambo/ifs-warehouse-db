@@ -73,15 +73,62 @@ public class WarehouseApp {
                 System.out.println("Initializing Live Web Server API Panel on Port 8080...");
 
                 try {
-                    // Create and launch the web listener socket on port 8080
                     HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+                    // 2. Define the web address portal context route path with active DB query
                     server.createContext("/api/reports", new HttpHandler() {
                         public void handle(HttpExchange exchange) throws IOException {
-                            String response = "IFS Warehouse Web API Portal - Data Coming Soon!";
-                            exchange.sendResponseHeaders(200, response.length());
+                            StringBuilder webResponse = new StringBuilder();
+                            webResponse.append("=== IFS WAREHOUSE LIVE WEB API SUITE ===\n\n");
+                            webResponse.append(String.format("%-30s | %-12s | %-12s\n", "PRODUCT NAME", "STOCK LEVEL",
+                                    "TOTAL ORDERED"));
+                            webResponse
+                                    .append("----------------------------------------------------------------------\n");
+
+                            String url = "jdbc:postgresql://localhost:5432/ifs_warehouse";
+                            String user = "postgres";
+                            String password = "postgres";
+
+                            try {
+                                Connection connection = DriverManager.getConnection(url, user, password);
+                                Statement statement = connection.createStatement();
+
+                                String query = "SELECT products.product_name, products.stock_level, " +
+                                        "SUM(purchase_orders.order_quantity) AS total_ordered " +
+                                        "FROM purchase_orders " +
+                                        "INNER JOIN products ON purchase_orders.product_id = products.product_id " +
+                                        "GROUP BY products.product_name, products.stock_level " +
+                                        "ORDER BY total_ordered DESC;";
+
+                                ResultSet resultSet = statement.executeQuery(query);
+
+                                while (resultSet.next()) {
+                                    String name = resultSet.getString("product_name");
+                                    int stock = resultSet.getInt("stock_level");
+                                    int ordered = resultSet.getInt("total_ordered");
+
+                                    webResponse.append(String.format("%-30s | %-12d | %-12d\n", name, stock, ordered));
+                                }
+
+                                resultSet.close();
+                                statement.close();
+                                connection.close();
+
+                            } catch (Exception e) {
+                                webResponse.append("Database extraction failed: ").append(e.getMessage());
+                            }
+
+                            webResponse
+                                    .append("----------------------------------------------------------------------\n");
+
+                            String finalResponse = webResponse.toString();
+
+                            // Set Content-Type to plain text so the browser formats our table alignment
+                            // nicely
+                            exchange.getResponseHeaders().set("Content-Type", "text/plain");
+                            exchange.sendResponseHeaders(200, finalResponse.length());
                             OutputStream os = exchange.getResponseBody();
-                            os.write(response.getBytes());
+                            os.write(finalResponse.getBytes());
                             os.close();
                         }
                     });
@@ -98,7 +145,7 @@ public class WarehouseApp {
 
             } else if (choice.equals("3")) {
                 System.out.println("Shutting down warehouse engine. Goodbye!");
-                System.exit(0); // Master kill-switch drops background threads instantly!
+                System.exit(0);
 
             } else {
                 System.out.println("Invalid selection. Please try again.");
