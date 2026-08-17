@@ -75,14 +75,12 @@ public class WarehouseApp {
                 try {
                     HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
-                    // ROUTE 1: Serve your beautiful fCC index.html dashboard file at
-                    // http://localhost:8080/
+                    // ROUTE 1: Serve your index.html dashboard file
                     server.createContext("/", new HttpHandler() {
                         public void handle(HttpExchange exchange) throws IOException {
                             try {
                                 byte[] htmlBytes = java.nio.file.Files
                                         .readAllBytes(java.nio.file.Paths.get("index.html"));
-
                                 exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
                                 exchange.sendResponseHeaders(200, htmlBytes.length);
                                 OutputStream os = exchange.getResponseBody();
@@ -98,9 +96,20 @@ public class WarehouseApp {
                         }
                     });
 
-                    // ROUTE 2: Serve your live database analytics matrix data stream
+                    // ROUTE 2: Serve your live database metrics stream
                     server.createContext("/api/reports", new HttpHandler() {
                         public void handle(HttpExchange exchange) throws IOException {
+                            // Handle Browser Pre-flight Options Check (Mandatory for Cross-Port Requests)
+                            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+                                exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+                                exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS, POST");
+                                exchange.getResponseHeaders().set("Access-Control-Allow-Headers",
+                                        "Content-Type, Authorization");
+                                exchange.sendResponseHeaders(204, -1);
+                                exchange.close();
+                                return;
+                            }
+
                             StringBuilder webResponse = new StringBuilder();
                             webResponse.append("=== IFS WAREHOUSE LIVE WEB API SUITE ===\n\n");
                             webResponse.append(String.format("%-30s | %-12s | %-12s\n", "PRODUCT NAME", "STOCK LEVEL",
@@ -147,15 +156,14 @@ public class WarehouseApp {
                             String finalResponse = webResponse.toString();
                             byte[] responseBytes = finalResponse.getBytes("UTF-8");
 
-                            // 🚨 THE CRITICAL DUAL-SERVER SECURITY CLEARENCE:
+                            // Set strict sequence origin tags to authorize browser streams
                             exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-                            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS");
+                            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS, POST");
                             exchange.getResponseHeaders().set("Access-Control-Allow-Headers",
                                     "Content-Type, Authorization");
                             exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
 
                             exchange.sendResponseHeaders(200, responseBytes.length);
-
                             OutputStream os = exchange.getResponseBody();
                             os.write(responseBytes);
                             os.close();
@@ -164,7 +172,6 @@ public class WarehouseApp {
 
                     server.setExecutor(null);
                     server.start();
-
                     System.out
                             .println("Web Server Portal is Live! Open your browser and visit: http://localhost:8080/");
 

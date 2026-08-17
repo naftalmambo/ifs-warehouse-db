@@ -1,91 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warehouse Operator Console</title>
     <style>
-        /* Pure, lightweight CSS - No internet connection or download required! */
-        body {
-            font-family: 'Courier New', Courier, monospace; /* Clean terminal text font */
-            background-color: #1e1e1e; /* Dark theme to save your eyes */
-            color: #ffffff; /* Crisp white data text */
-            padding: 30px;
-            margin: 0;
-        }
-        h2 {
-            color: #00ff00; /* Classic hacker green system header title */
-            margin-bottom: 5px;
-        }
-        p {
-            color: #aaaaaa;
-            font-size: 14px;
-            margin-top: 0;
-        }
-        hr {
-            border: 0;
-            border-top: 1px solid #444444;
-            margin: 20px 0;
-        }
-        .btn-stream {
-            background-color: #00ff00;
-            color: #000000;
-            border: none;
-            padding: 10px 20px;
-            font-family: inherit;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .btn-stream:hover {
-            background-color: #00cc00;
-        }
-        pre {
-            background-color: #000000; /* Absolute pitch-black console panel */
-            color: #00ff00; /* High-contrast data grids */
-            padding: 20px;
-            border: 1px solid #444444;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+      body {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        padding: 30px;
+        margin: 0;
+      }
+      h2 {
+        color: #00ff00;
+        margin-bottom: 5px;
+      }
+      p {
+        color: #aaaaaa;
+        font-size: 14px;
+        margin-top: 0;
+      }
+      hr {
+        border: 0;
+        border-top: 1px solid #444444;
+        margin: 20px 0;
+      }
+      .btn-stream {
+        background-color: #00ff00;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        font-family: inherit;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .btn-stream:hover {
+        background-color: #00cc00;
+      }
+      pre {
+        background-color: #000000;
+        color: #00ff00;
+        padding: 20px;
+        border: 1px solid #444444;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 15px;
+        line-height: 1.5;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <h2>[ IFS INDUSTRIAL WAREHOUSE OPERATIONS HUB ]</h2>
     <p>API Endpoint Loop: http://localhost:8080/api/reports</p>
-    <hr>
+    <hr />
 
-    <div style="margin-bottom: 25px;">
-        <button class="btn-stream" onclick="fetchWarehouseData()">
-            EXECUTE LIVE PORT POLL
-        </button>
+    <div style="margin-bottom: 25px">
+      <button class="btn-stream" onclick="fetchWarehouseData()">
+        EXECUTE LIVE PORT POLL
+      </button>
     </div>
 
     <div>
-        <pre id="api-output-viewport">CONSOLE INSTANCE IDLE // Ready to stream relational table matrices...</pre>
+      <pre id="api-output-viewport">
+CONSOLE INSTANCE IDLE // Ready to stream relational table matrices...</pre
+      >
     </div>
 
     <script>
-        function fetchWarehouseData() {
-            const viewport = document.getElementById('api-output-viewport');
-            viewport.textContent = "PINGING PORT 8080... STREAMING LIVE DATABASE RECORD BYTES...";
+      function fetchWarehouseData() {
+        const viewport = document.getElementById("api-output-viewport");
+        viewport.textContent =
+          "PINGING PORT 8080... STREAMING LIVE DATABASE RECORD BYTES...";
 
-            fetch('http://localhost:8080/api/reports')
-                .then(response => {
-                    if (!response.ok) throw new Error("API stream connection timeout");
-                    return response.text();
-                })
-                .then(data => {
-                    viewport.textContent = data;
-                })
-                .catch(error => {
-                    viewport.textContent = "CRITICAL FAILURE: " + error.message;
-                });
+        // Dual-Server Network Domain Route Mapping
+        let apiLocation = "/api/reports";
+        if (window.location.port === "5500") {
+          apiLocation = "http://localhost:8080/api/reports";
         }
-    </script>
 
-</body>
+        fetch(apiLocation)
+          .then((response) => {
+            if (!response.ok) throw new Error("API stream connection timeout");
+            return response.text();
+          })
+          .then((data) => {
+            viewport.textContent = data;
+          })
+          .catch((error) => {
+            viewport.textContent = "CRITICAL FAILURE: " + error.message;
+          });
+      }
+    </script>
+  </body>
 </html>
