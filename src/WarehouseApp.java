@@ -12,6 +12,7 @@ public class WarehouseApp {
         while (true) {
             System.out.println("");
             System.out.println("=== WAREHOUSE MAIN MENU ===");
+
             System.out.println("1. View Analytical Reports");
             System.out.println("2. Exit System");
             System.out.print("Select an option: ");
@@ -46,8 +47,8 @@ public class WarehouseApp {
                     System.out.printf("%-30s | %-12s | %-12s\n", "PRODUCT NAME", "STOCK LEVEL", "TOTAL ORDERED");
                     System.out.println("----------------------------------------------------------------------");
 
-                    // 4. Loop through the rows one-by-one (Just like iterating an ArrayList in MOOC
-                    // Part 3!)
+                    // 4. Loop through the rows one-by-one
+
                     while (resultSet.next()) {
                         String name = resultSet.getString("product_name");
                         int stock = resultSet.getInt("stock_level");
