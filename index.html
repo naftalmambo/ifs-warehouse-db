@@ -3,91 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFS Warehouse Executive Dashboard</title>
-    <!-- Pulling in the standard corporate Bootstrap 5 CSS via CDN -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
+    <title>Warehouse Operator Console</title>
     <style>
+        /* Pure, lightweight CSS - No internet connection or download required! */
         body {
-            background-color: #f8f9fa; /* Sleek light-grey tech background */
+            font-family: 'Courier New', Courier, monospace; /* Clean terminal text font */
+            background-color: #1e1e1e; /* Dark theme to save your eyes */
+            color: #ffffff; /* Crisp white data text */
+            padding: 30px;
+            margin: 0;
         }
-        .report-card {
+        h2 {
+            color: #00ff00; /* Classic hacker green system header title */
+            margin-bottom: 5px;
+        }
+        p {
+            color: #aaaaaa;
+            font-size: 14px;
+            margin-top: 0;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #444444;
+            margin: 20px 0;
+        }
+        .btn-stream {
+            background-color: #00ff00;
+            color: #000000;
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Modern soft shadow styling */
+            padding: 10px 20px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn-stream:hover {
+            background-color: #00cc00;
         }
         pre {
-            background-color: #212529; /* Dark terminal-style text display block */
-            color: #f8f9fa;
+            background-color: #000000; /* Absolute pitch-black console panel */
+            color: #00ff00; /* High-contrast data grids */
             padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <!-- Main Responsive Layout Wrapper -->
-    <div class="container my-5">
-        
-        <!-- Header Banner Section -->
-        <div class="row mb-4">
-            <div class="col">
-                <div class="bg-primary text-white p-4 rounded-3 shadow-sm">
-                    <h1 class="display-5 fw-bold">IFS Industrial Warehouse Hub</h1>
-                    <p class="lead mb-0">Live Full-Stack Enterprise Analytics Dashboard</p>
-                </div>
-            </div>
-        </div>
+    <h2>[ IFS INDUSTRIAL WAREHOUSE OPERATIONS HUB ]</h2>
+    <p>API Endpoint Loop: http://localhost:8080/api/reports</p>
+    <hr>
 
-        <!-- Metric Reporting Controls Card -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card report-card p-4">
-                    <h3 class="text-secondary mb-3">Product Stock & Procurement Metrics</h3>
-                    <p class="text-muted">Click the button below to execute an automated live network poll across your Java API gateway node.</p>
-                    
-                    <!-- Interactive UI Trigger Buttons -->
-                    <div class="mb-4">
-                        <button class="btn btn-success btn-lg fw-bold shadow-sm" onclick="fetchWarehouseData()">
-                            🔄 Stream Live Database Report
-                        </button>
-                    </div>
-
-                    <!-- Live Data Output Stream Viewport -->
-                    <div>
-                        <h5 class="text-dark fw-semibold mb-2">Live API Output Matrix:</h5>
-                        <pre id="api-output-viewport">Dashboard idle. Click the stream button above to pull real-time server records...</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div style="margin-bottom: 25px;">
+        <button class="btn-stream" onclick="fetchWarehouseData()">
+            EXECUTE LIVE PORT POLL
+        </button>
     </div>
 
-    <!-- Embedding our custom network plumbing JavaScript snippet -->
+    <div>
+        <pre id="api-output-viewport">CONSOLE INSTANCE IDLE // Ready to stream relational table matrices...</pre>
+    </div>
+
     <script>
         function fetchWarehouseData() {
             const viewport = document.getElementById('api-output-viewport');
-            viewport.textContent = "Connecting to Java API Server node on Port 8080... Please wait...";
+            viewport.textContent = "PINGING PORT 8080... STREAMING LIVE DATABASE RECORD BYTES...";
 
-        
-            // Change this to a clean relative path block! 
-            // It automatically targets whatever server domain is currently hosting this page!
             fetch('http://localhost:8080/api/reports')
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Server communication hurdle encountered");
-                    }
-                    return response.text(); // Extract the raw text table data package stream
+                    if (!response.ok) throw new Error("API stream connection timeout");
+                    return response.text();
                 })
                 .then(data => {
-                    // Update our styled layout box with the actual live database numbers!
                     viewport.textContent = data;
                 })
                 .catch(error => {
-                    viewport.textContent = "Data pipeline blockage: Unable to connect to the backend server. Make sure Option 2 is currently running in your terminal panel! " + error.message;
+                    viewport.textContent = "CRITICAL FAILURE: " + error.message;
                 });
         }
     </script>
+
 </body>
 </html>
