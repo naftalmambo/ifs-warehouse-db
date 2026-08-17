@@ -4,6 +4,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+// Web Server API Framework Infrastructure
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpExchange;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
 public class WarehouseApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
