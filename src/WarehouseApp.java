@@ -75,7 +75,30 @@ public class WarehouseApp {
                 try {
                     HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
-                    // 2. Define the web address portal context route path with active DB query
+                    // ROUTE 1: Serve your beautiful fCC index.html dashboard file at
+                    // http://localhost:8080/
+                    server.createContext("/", new HttpHandler() {
+                        public void handle(HttpExchange exchange) throws IOException {
+                            try {
+                                byte[] htmlBytes = java.nio.file.Files
+                                        .readAllBytes(java.nio.file.Paths.get("index.html"));
+
+                                exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
+                                exchange.sendResponseHeaders(200, htmlBytes.length);
+                                OutputStream os = exchange.getResponseBody();
+                                os.write(htmlBytes);
+                                os.close();
+                            } catch (Exception e) {
+                                String errorMsg = "Missing index.html file inside project root directory!";
+                                exchange.sendResponseHeaders(404, errorMsg.length());
+                                OutputStream os = exchange.getResponseBody();
+                                os.write(errorMsg.getBytes());
+                                os.close();
+                            }
+                        }
+                    });
+
+                    // ROUTE 2: Serve your live database analytics matrix data stream
                     server.createContext("/api/reports", new HttpHandler() {
                         public void handle(HttpExchange exchange) throws IOException {
                             StringBuilder webResponse = new StringBuilder();
@@ -122,13 +145,19 @@ public class WarehouseApp {
                                     .append("----------------------------------------------------------------------\n");
 
                             String finalResponse = webResponse.toString();
+                            byte[] responseBytes = finalResponse.getBytes("UTF-8");
 
-                            // Set Content-Type to plain text so the browser formats our table alignment
-                            // nicely
-                            exchange.getResponseHeaders().set("Content-Type", "text/plain");
-                            exchange.sendResponseHeaders(200, finalResponse.length());
+                            // 🚨 THE CRITICAL DUAL-SERVER SECURITY CLEARENCE:
+                            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+                            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS");
+                            exchange.getResponseHeaders().set("Access-Control-Allow-Headers",
+                                    "Content-Type, Authorization");
+                            exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
+
+                            exchange.sendResponseHeaders(200, responseBytes.length);
+
                             OutputStream os = exchange.getResponseBody();
-                            os.write(finalResponse.getBytes());
+                            os.write(responseBytes);
                             os.close();
                         }
                     });
@@ -136,8 +165,8 @@ public class WarehouseApp {
                     server.setExecutor(null);
                     server.start();
 
-                    System.out.println(
-                            "Web Server API is Live! Open your browser and visit: http://localhost:8080/api/reports");
+                    System.out
+                            .println("Web Server Portal is Live! Open your browser and visit: http://localhost:8080/");
 
                 } catch (Exception e) {
                     System.out.println("Failed to launch web server engine: " + e.getMessage());

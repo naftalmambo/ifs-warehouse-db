@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS Warehouse Executive Dashboard</title>
+    <!-- Pulling in the standard corporate Bootstrap 5 CSS via CDN -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Sleek light-grey tech background */
+        }
+        .report-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Modern soft shadow styling */
+        }
+        pre {
+            background-color: #212529; /* Dark terminal-style text display block */
+            color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Responsive Layout Wrapper -->
+    <div class="container my-5">
+        
+        <!-- Header Banner Section -->
+        <div class="row mb-4">
+            <div class="col">
+                <div class="bg-primary text-white p-4 rounded-3 shadow-sm">
+                    <h1 class="display-5 fw-bold">IFS Industrial Warehouse Hub</h1>
+                    <p class="lead mb-0">Live Full-Stack Enterprise Analytics Dashboard</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metric Reporting Controls Card -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card report-card p-4">
+                    <h3 class="text-secondary mb-3">Product Stock & Procurement Metrics</h3>
+                    <p class="text-muted">Click the button below to execute an automated live network poll across your Java API gateway node.</p>
+                    
+                    <!-- Interactive UI Trigger Buttons -->
+                    <div class="mb-4">
+                        <button class="btn btn-success btn-lg fw-bold shadow-sm" onclick="fetchWarehouseData()">
+                            🔄 Stream Live Database Report
+                        </button>
+                    </div>
+
+                    <!-- Live Data Output Stream Viewport -->
+                    <div>
+                        <h5 class="text-dark fw-semibold mb-2">Live API Output Matrix:</h5>
+                        <pre id="api-output-viewport">Dashboard idle. Click the stream button above to pull real-time server records...</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Embedding our custom network plumbing JavaScript snippet -->
+    <script>
+        function fetchWarehouseData() {
+            const viewport = document.getElementById('api-output-viewport');
+            viewport.textContent = "Connecting to Java API Server node on Port 8080... Please wait...";
+
+        
+            // Change this to a clean relative path block! 
+            // It automatically targets whatever server domain is currently hosting this page!
+            fetch('http://localhost:8080/api/reports')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server communication hurdle encountered");
+                    }
+                    return response.text(); // Extract the raw text table data package stream
+                })
+                .then(data => {
+                    // Update our styled layout box with the actual live database numbers!
+                    viewport.textContent = data;
+                })
+                .catch(error => {
+                    viewport.textContent = "Data pipeline blockage: Unable to connect to the backend server. Make sure Option 2 is currently running in your terminal panel! " + error.message;
+                });
+        }
+    </script>
+</body>
+</html>
