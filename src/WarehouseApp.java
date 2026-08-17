@@ -20,9 +20,9 @@ public class WarehouseApp {
         while (true) {
             System.out.println("");
             System.out.println("=== WAREHOUSE MAIN MENU ===");
-
-            System.out.println("1. View Analytical Reports");
-            System.out.println("2. Exit System");
+            System.out.println("1. View Analytical Reports (Terminal)");
+            System.out.println("2. Start Live Web Server API Panel");
+            System.out.println("3. Exit System");
             System.out.print("Select an option: ");
 
             String choice = scanner.nextLine();
@@ -39,7 +39,6 @@ public class WarehouseApp {
 
                     System.out.println("Database Connection Established Flawlessly!\n");
 
-                    // 1. Pack your master analytical query text into a clean Java string
                     String query = "SELECT products.product_name, products.stock_level, " +
                             "SUM(purchase_orders.order_quantity) AS total_ordered " +
                             "FROM purchase_orders " +
@@ -47,27 +46,21 @@ public class WarehouseApp {
                             "GROUP BY products.product_name, products.stock_level " +
                             "ORDER BY total_ordered DESC;";
 
-                    // 2. Fire the query across the network and trap the incoming data matrix grid
                     ResultSet resultSet = statement.executeQuery(query);
 
-                    // 3. Print a beautiful visual dashboard header grid onto the screen
                     System.out.println("----------------------------------------------------------------------");
                     System.out.printf("%-30s | %-12s | %-12s\n", "PRODUCT NAME", "STOCK LEVEL", "TOTAL ORDERED");
                     System.out.println("----------------------------------------------------------------------");
-
-                    // 4. Loop through the rows one-by-one
 
                     while (resultSet.next()) {
                         String name = resultSet.getString("product_name");
                         int stock = resultSet.getInt("stock_level");
                         int ordered = resultSet.getInt("total_ordered");
 
-                        // Print the row values cleanly aligned inside the terminal console panel
                         System.out.printf("%-30s | %-12d | %-12d\n", name, stock, ordered);
                     }
                     System.out.println("----------------------------------------------------------------------");
 
-                    // Safely close connection lines to save memory
                     resultSet.close();
                     statement.close();
                     connection.close();
@@ -77,8 +70,35 @@ public class WarehouseApp {
                 }
 
             } else if (choice.equals("2")) {
+                System.out.println("Initializing Live Web Server API Panel on Port 8080...");
+
+                try {
+                    // Create and launch the web listener socket on port 8080
+                    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+
+                    server.createContext("/api/reports", new HttpHandler() {
+                        public void handle(HttpExchange exchange) throws IOException {
+                            String response = "IFS Warehouse Web API Portal - Data Coming Soon!";
+                            exchange.sendResponseHeaders(200, response.length());
+                            OutputStream os = exchange.getResponseBody();
+                            os.write(response.getBytes());
+                            os.close();
+                        }
+                    });
+
+                    server.setExecutor(null);
+                    server.start();
+
+                    System.out.println(
+                            "Web Server API is Live! Open your browser and visit: http://localhost:8080/api/reports");
+
+                } catch (Exception e) {
+                    System.out.println("Failed to launch web server engine: " + e.getMessage());
+                }
+
+            } else if (choice.equals("3")) {
                 System.out.println("Shutting down warehouse engine. Goodbye!");
-                break;
+                System.exit(0); // Master kill-switch drops background threads instantly!
 
             } else {
                 System.out.println("Invalid selection. Please try again.");
