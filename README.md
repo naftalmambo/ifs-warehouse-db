@@ -1,6 +1,6 @@
 # IFS Industrial Warehouse Management Engine
 
-This is a full-stack web application for warehouse reporting. It connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database [1.13, 1.1.7].
+This is a full-stack web application for warehouse reporting. It connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
 
 ---
 
@@ -29,7 +29,7 @@ This map shows the location of every file created inside the project:
 
 ```text
 ~/ifs-warehouse-db/
-├── index.html               # Frontend dashboard viewport page (HTML, Local CSS, JS Fetch) [1.13]
+├── index.html               # Frontend dashboard viewport page (HTML, Local CSS, JS Fetch)
 ├── postgresql.jar           # Database driver package file (The Translator Bridge)
 ├── README.md                # System documentation and setup guide
 ├── schema/
@@ -39,7 +39,7 @@ This map shows the location of every file created inside the project:
 ├── queries/
 │   └── analytics.sql        # Reference SQL JOIN calculation script
 └── src/
-    └── WarehouseApp.java    # Monolithic Java Backend Source Code [1.13]
+    └── WarehouseApp.java    # Monolithic Java Backend Source Code
 ```
 
 ---
@@ -122,7 +122,7 @@ Click the **`EXECUTE LIVE PORT POLL`** button. The dashboard will instantly fetc
 
 ## 📊 Core Analytical Query (`queries/analytics.sql`)
 
-This is the database query your backend executes to calculate inventory metrics across multiple tables:
+This is the database query the backend executes to calculate inventory metrics across multiple tables:
 
 ```sql
 SELECT products.product_name, products.stock_level,
@@ -136,11 +136,6 @@ ORDER BY total_ordered DESC;
 ---
 
 ## 🧠 Lessons Learned
-
-- **Manual System Integration:** Writing code and linking drivers manually gives you a deep understanding of how compilers, runtime environments, and databases operate.
-- **CORS Policies & Pre-flight Checks:** Web browsers block cross-port network requests unless the backend explicitly handles `OPTIONS` pre-flight requests and sends safety clearance headers.
-- **Dynamic Client Routing:** Hardcoding server domains causes connection issues. Using conditional scripts with `window.location.port` makes the interface universal across different development servers.
-- **Performance Optimization:** Removing external online dependencies allows the interface to load instantly from your local drive without internet access.
 
 ---
 
