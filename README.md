@@ -6,20 +6,19 @@ This is a full-stack web application for warehouse reporting. It connects a fron
 
 ## 📸 System Preview
 
-Below is a preview of the minimalist, high-contrast operations dashboard streaming live data from the backend server across port 8080:
+Below is a preview of the operations dashboard streaming live data from the backend server across port 8080:
 
-![IFS Warehouse Dashboard Preview](---)  
-_(Note: To use a custom screenshot, create a folder named `images/`, save your image inside it, and change this path to `images/your_screenshot.png`!)_
+![IFS Warehouse Dashboard Preview](images/dashboard-preview.png)
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack Used
 
 - **Operating System:** Linux Ubuntu (VirtualBox Environment)
 - **Database:** PostgreSQL SQL Database
 - **Backend Language:** Java (Version 11)
 - **Web Server Engine:** Java Built-in HttpServer Framework
-- **Frontend Interface:** HTML5 and JavaScript (Fetch API)
+- **Frontend Interface:** HTML5/CSS3 and JavaScript (Fetch API)
 
 ---
 
