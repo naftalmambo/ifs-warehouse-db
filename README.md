@@ -1,6 +1,6 @@
 # Inventory Management System - Prototype
 
-This is a proof of concept on full-stack web application development. Its a system that connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
+This is a proof of concept on full-stack web application development. It's a system that connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
 
 ---
 
@@ -145,6 +145,20 @@ INNER JOIN products ON purchase_orders.product_id = products.product_id
 GROUP BY products.product_name, products.stock_level
 ORDER BY total_ordered DESC;
 ```
+
+---
+
+### Optional: Verify Your Database Tables
+
+If you want to log into your PostgreSQL database manually to verify that your tables loaded correctly, run these quick commands in your terminal:
+
+1. **Log in to the database:**
+   ```bash
+   sudo -u postgres psql -d ifs_warehouse
+   ```
+2. **List all active tables:** Type `\dt` and press Enter to see your `products` and `purchase_orders` tables.
+3. **Print your rows:** Type `SELECT * FROM products;` to view your data records.
+4. **Exit the database:** Type `\q` to return to your normal terminal prompt.
 
 ---
 
