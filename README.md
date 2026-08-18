@@ -173,7 +173,7 @@ If you want to log into your PostgreSQL database manually to verify that your ta
 
 ## 🤝 Acknowledgments & Collaboration
 
-- **AI Collaboration:** Developed in partnership with Google AI as an engineering peer. Used Google AI to brainstorm ystem architecture, troubleshoot cross-origin network ports, and refine professional code documentation.
+- **AI Collaboration:** Developed in partnership with Google AI as an engineering peer. Used Google AI to brainstorm system architecture, troubleshoot cross-origin network ports, and refine professional code documentation.
 
 ## 🚀 Future Upgrades
 
