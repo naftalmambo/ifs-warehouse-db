@@ -164,7 +164,16 @@ If you want to log into your PostgreSQL database manually to verify that your ta
 
 ## 🧠 Lessons Learned
 
+- **System Architecture:** Learned and gained some knowledge on the architecture behind full-stack development.
+- **Database Integration:** Practiced how database tables pass records up to a backend server.
+- **Browser Connections:** Handled how a webpage talks to an active server over local network ports.
+- **Offline Performance:** Learned how to make a webpage load instantly from a local drive without needing the internet
+
 ---
+
+## 🤝 Acknowledgments & Collaboration
+
+- **AI Collaboration:** Developed in partnership with Google AI as an engineering peer. Used Google AI to brainstorm ystem architecture, troubleshoot cross-origin network ports, and refine professional code documentation.
 
 ## 🚀 Future Upgrades
 
