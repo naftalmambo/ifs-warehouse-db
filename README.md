@@ -8,7 +8,7 @@ Many industrial warehouses rely on slow, manual spreadsheet entries or paper log
 
 ### 💡 The Engineered Solution
 
-This application completely automates inventory tracking and reporting. By building a direct data pipeline, warehouse managers can view real-time stock levels and calculate bulk order metrics instantly with a single click. This eliminates manual logs, saves operational hours, and prevents wastage of warehouse resources [1.13].
+This application completely automates inventory tracking and reporting. By building a direct data pipeline, warehouse managers can view real-time stock levels and calculate bulk order metrics instantly with a single click. This eliminates manual logs, saves operational hours, and prevents wastage of warehouse resources.
 
 ---
 
