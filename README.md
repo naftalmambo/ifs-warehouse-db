@@ -53,6 +53,11 @@ This map shows the location of every file created inside the project:
 ├── index.html               # Frontend dashboard viewport page (HTML, Local CSS, JS Fetch)
 ├── postgresql.jar           # Database driver package file (The Translator Bridge)
 ├── README.md                # System documentation and setup guide
+├── LICENSE                  # Open-source MIT License terms and conditions
+├── images/
+│   ├── web-dashboard.png    # Frontend dashboard interface screenshot
+│   ├── backend-server.png   # Active Java backend server console log preview
+│   └── database-terminal.png # Terminal view of database connections and queries
 ├── schema/
 │   └── schema.sql           # Database table structural blueprints
 ├── seeding/
@@ -61,6 +66,7 @@ This map shows the location of every file created inside the project:
 │   └── analytics.sql        # Reference SQL JOIN calculation script
 └── src/
     └── WarehouseApp.java    # Monolithic Java Backend Source Code
+
 ```
 
 ---
