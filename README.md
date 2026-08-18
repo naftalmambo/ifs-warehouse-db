@@ -1,5 +1,11 @@
 # Inventory Management System - Prototype
 
+### 🖥️ System Overview
+
+This repository features a fully functional, three-tier desktop application built entirely from scratch without heavy framework layers. It integrates an offline-first HTML5 and JavaScript user dashboard directly with a native backend Java web server, allowing immediate data streaming out of a localized PostgreSQL database.
+
+**Development Methodology:** This system was built using a systematic **back-to-front approach**. The foundational database schemas and constraints were established first, followed by wiring the Java server socket controllers, and finally constructing the frontend dashboard to display the processed data streams securely.
+
 ---
 
 ### 🎯 The Business Problem
