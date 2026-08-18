@@ -1,6 +1,14 @@
 # Inventory Management System - Prototype
 
-This is a proof of concept on full-stack web application development. It's a system that connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
+---
+
+### 🎯 The Business Problem
+
+Many industrial warehouses rely on slow, manual spreadsheet entries or paper logbooks to track stock. This manual process causes delayed reporting, human calculation errors, stockouts, and massive waste of operational resources.
+
+### 💡 The Engineered Solution
+
+This application completely automates inventory tracking and reporting. By building a direct data pipeline, warehouse managers can view real-time stock levels and calculate bulk order metrics instantly with a single click. This eliminates manual logs, saves operational hours, and prevents wastage of warehouse resources [1.13].
 
 ---
 
