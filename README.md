@@ -1,14 +1,28 @@
-# IFS Industrial Warehouse Management Engine
+# Inventory Management System - Prototype
 
-This is a full-stack web application for warehouse reporting. It connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
+This is a proof of concept on full-stack web application development. Its a system that connects a frontend user interface to a Java backend server, allowing users to stream live inventory data directly from a local PostgreSQL database.
 
 ---
 
 ## 📸 System Preview
 
-Below is a preview of the operations dashboard streaming live data from the backend server across port 8080:
+### 1. Web Operations Dashboard
+
+This is the webpage where users click a button to pull live data from the database instantly without reloading the page:
 
 ![IFS Warehouse Dashboard Preview](images/dashboard-preview.png)
+
+### 2. Java Backend Web Server
+
+This is the backend Java program running in the terminal. It listens for web requests and streams database records back to the webpage:
+
+![Backend Server Preview](images/backend-server.png)
+
+### 3. PostgreSQL Database Terminal
+
+This is the local database terminal where we run scripts to build tables and insert our 19 default inventory rows.
+
+![Database Terminal Preview](images/database-terminal.png)
 
 ---
 
@@ -106,7 +120,7 @@ java -cp src:postgresql.jar WarehouseApp
 
 ### Step 5: Start the Web Server API Panel
 
-When the terminal menu appears, **type option 2 and press Enter** [1.13]. This instructs Java to listen for incoming web requests on port 8080 [1.13].
+When the terminal menu appears, **type option 2 and press Enter**. This instructs Java to listen for incoming web requests on port 8080.
 
 ### Step 6: Open the Dashboard in Your Browser
 
@@ -115,7 +129,7 @@ You can open the user interface using **either** of the following methods:
 - **Method A (Java Server):** Open a browser tab and go to: 👉 **`http://localhost:8080/`**
 - **Method B (VS Code Live Server):** Right-click `index.html` in VS Code and select **Open with Live Server** to access: 👉 **`http://127.0.0.1:5500/index.html`**.
 
-Click the **`EXECUTE LIVE PORT POLL`** button. The dashboard will instantly fetch your live database records without reloading the page [1.13]!
+Click the **`EXECUTE LIVE PORT POLL`** button. The dashboard will instantly fetch your live database records without reloading the page!
 
 ---
 
